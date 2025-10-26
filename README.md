@@ -50,3 +50,5 @@ If the protocol changes, the developer only needs to update the YAML file and re
     python3 src/generate_codec.py --config src/c1_boe_2_11_68.yaml --create
     ```
 4.  **Review the Output:** Observe the generated C++ files inside `src/codecs/C1/BOE/2_11_68/`.
+<br>
+Arigatoooo! 🙏
