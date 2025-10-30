@@ -1,0 +1,4 @@
+# Project dependencies for cpp-code-generation-system
+# Use minimum tested versions and prevent accidental major upgrades
+PyYAML>=6.0,<7.0
+Jinja2>=3.0,<4.0
