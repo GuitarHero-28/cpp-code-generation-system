@@ -99,4 +99,57 @@ std::string processPayload(const std::vector<char> &hexPayload, Status &status, 
     {
         std::cout << "Encoding LoginRequest Message Object\n";
         startTime = std::chrono::high_resolution_clock::now();
-        encoder.encode(buffer
+        encoder.encode(buffer, decoder.getLoginRequest(), status);
+        endTime = std::chrono::high_resolution_clock::now();
+    }
+    else if (message_type == MessagesEnum::NEWORDERCROSS)
+    {
+        std::cout << "Encoding NewCrossOrder Message Object\n";
+        startTime = std::chrono::high_resolution_clock::now();
+        encoder.encode(buffer, decoder.getNewOrderCross(), status);
+        endTime = std::chrono::high_resolution_clock::now();
+    }
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+    std::cout << "Time taken by Encoder: " << duration.count() << " microseconds" << std::endl;
+
+    return convertBinaryToHex(buffer, buffer.size());
+}
+
+// Function to compare hex strings and report differences
+void compareHexStrings(const std::string &original, const std::string &encoded)
+{
+    std::cout << "========================================================================" << std::endl;
+    std::cout << "INPUT PAYLOAD -> DECODER -> MSG OBJECT -> ENCODER -> ENCODED PAYLOAD" << std::endl;
+    std::cout << "========================================================================" << std::endl;
+
+    std::cout << "Original Hex Payload : " << original << std::endl;
+    std::cout << "Encoded Hex Payload  : " << encoded << std::endl;
+
+    if (original == encoded)
+    {
+        std::cout << "\nResult: INPUT PAYLOAD == ENCODED PAYLOAD" << std::endl;
+    }
+    else
+    {
+        std::cout << "\nResult: INPUT PAYLOAD != ENCODED PAYLOAD" << std::endl;
+    }
+    std::cout << "========================================================================" << std::endl;
+}
+
+// Main function
+int main(int argc, char *argv[])
+{
+    if (argc != 3)
+    {
+        std::cerr << "Usage: " << argv[0] << " <message_type>" << " <filename>" << std::endl;
+        return 1;
+    }
+    // Step 1: Read hex payload from file
+    std::vector<char> hexPayload = readHexPayloadFromFile(argv[2]);
+    // Step 3: Process payload through decode and encode steps
+    Status status;
+    std::string encodedPayload = processPayload(hexPayload, status, atoi(argv[1]));
+    // Step 4: Compare original and encoded payloads
+    compareHexStrings(std::string(hexPayload.begin(), hexPayload.end()), encodedPayload);
+    return 0;
+}
