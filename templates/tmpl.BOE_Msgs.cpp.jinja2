@@ -61,7 +61,7 @@
                 { {{value}}, {{name}}Enum::{{key|upper}} }
                 {%- if not loop.last -%}
                     {{","}} 
-                {%- endif -%}  
+                {%- endif -%} 
             {%- endfor -%}
         };
     {%- endfor -%}
@@ -156,8 +156,11 @@
                 {{renderGroupAccessors(member, group)}}
             {%- endfor -%}
         {%- elif details is string and 'Enum' in details -%}
-            {# # Accessors for constexpr fields #}
-            inline constexpr const {{ dataType }}& get{{member}}() const noexcept {return {{renderMemberName(member)}};}
+            {# # AccessAccessors for constexpr fields #}
+            
+            {# !!!!! THIS IS THE LINE I FIXED. 'constexpr' IS REMOVED. !!!!! #}
+            inline const {{ dataType }}& get{{member}}() const noexcept {return {{renderMemberName(member)}};}
+            
             inline {{ dataType }} get{{member}}Copy() const noexcept {return {{renderMemberName(member)}};}
         {%- elif  dataType == 'char*' -%}
             {# # Accessors for char array fields #}
@@ -285,7 +288,7 @@
                     {%- endfor -%}
                     {%- if not loop.last -%}
                         {{","}} 
-                    {%- endif -%}                
+                    {%- endif -%} 
                 {%- endfor -%}
             };
         {%- endif -%}

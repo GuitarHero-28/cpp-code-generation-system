@@ -11,6 +11,23 @@
 {%- macro renderBaseEncoders() -%}
     {# # Base encoding functions for different field types #}
 
+    {# --- C++14 compatible helpers for enum checking --- #}
+    template <typename U>
+    inline typename std::enable_if<std::is_enum<U>::value>::type
+    _check_field_validity(const U& field, Status& status) {
+        if (field == U::UNKNOWN) {
+            status.updateStatus(StatusEnum::INVALID_OBJECT);
+        }
+    }
+
+    template <typename U>
+    inline typename std::enable_if<!std::is_enum<U>::value>::type
+    _check_field_validity(const U& field, Status& status) {
+        // Not an enum, so no check is needed
+    }
+    {# --- End of C++14 helpers --- #}
+
+
     {# # Template for encoding primitive types or enums #}
     template <typename U>
     inline void _encode(char *&start, char *end, const U &field, Status &status) noexcept
@@ -26,15 +43,10 @@
             return;
         }
 
-        {# # Ensure enums are valid (not set to UNKNOWN) #}
-        if constexpr (std::is_enum<U>::value)
-        {
-            if (field == U::UNKNOWN)
-            {
-                status.updateStatus(StatusEnum::INVALID_OBJECT);
-                return;
-            }
-        }
+        {# # Ensure enums are valid (not set to UNKNOWN) - C++14 compatible #}
+        _check_field_validity(field, status);
+        if (status.getStatus() != StatusEnum::PARSING)
+            return;
 
         {# # Write field data to the buffer #}
         *reinterpret_cast<U *>(start) = field;
@@ -174,10 +186,11 @@
     {%- endfor -%}
 {%- endmacro -%}
 
-##pragma once
+#pragma once
 #include "BOE_Msgs.h"
 #include "../../../../common/status.h"
 #include "../../../../common/utils.h"
+#include <type_traits>
 {{"\n"}}
 
 {# # Encoder class responsible for encoding various message types into binary format #}
@@ -224,7 +237,7 @@ public:
     // groupUnitSequences.setNoUnspecifiedUnitReplay(0x1);
 
     // groupNumberOfUnits.setUnitNumber(0x1);
-    // groupNumberOfUnits.setUnitSequence(0x0001bb4a);
+    // groupNumberOfUnits.setUnitSequence(0x0G++ -std=c++17 -O3 test.cpp -o test.out001bb4a);
     // groupUnitSequences.setGroupNumberOfUnits(std::move(groupNumberOfUnits));
 
     // groupNumberOfUnits.setUnitNumber(0x02);
