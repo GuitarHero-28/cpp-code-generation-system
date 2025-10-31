@@ -239,7 +239,10 @@ class GroupNumberOfNewOrderCrossBitfields {
             inline void setParamGroupLength(uint16_t paramGroupLength) noexcept { paramGroupLength_ = paramGroupLength;}
 
         
-            inline constexpr const uint8_t& getParamGroupType() const noexcept {return paramGroupType_;}
+            
+            
+            inline const uint8_t& getParamGroupType() const noexcept {return paramGroupType_;}
+            
             inline uint8_t getParamGroupTypeCopy() const noexcept {return paramGroupType_;}
 
         
@@ -308,7 +311,10 @@ class GroupNumberOfNewOrderCrossBitfields {
             inline void setParamGroupLength(uint16_t paramGroupLength) noexcept { paramGroupLength_ = paramGroupLength;}
 
         
-            inline constexpr const uint8_t& getParamGroupType() const noexcept {return paramGroupType_;}
+            
+            
+            inline const uint8_t& getParamGroupType() const noexcept {return paramGroupType_;}
+            
             inline uint8_t getParamGroupTypeCopy() const noexcept {return paramGroupType_;}
 
         
@@ -355,7 +361,10 @@ class LoginRequest {
             
 
         
-            inline constexpr const uint16_t& getStartOfMessage() const noexcept {return startOfMessage_;}
+            
+            
+            inline const uint16_t& getStartOfMessage() const noexcept {return startOfMessage_;}
+            
             inline uint16_t getStartOfMessageCopy() const noexcept {return startOfMessage_;}
 
         
@@ -365,15 +374,24 @@ class LoginRequest {
             inline void setMessageLength(uint16_t messageLength) noexcept { messageLength_ = messageLength;}
 
         
-            inline constexpr const uint8_t& getMessageType() const noexcept {return messageType_;}
+            
+            
+            inline const uint8_t& getMessageType() const noexcept {return messageType_;}
+            
             inline uint8_t getMessageTypeCopy() const noexcept {return messageType_;}
 
         
-            inline constexpr const uint8_t& getMatchingUnit() const noexcept {return matchingUnit_;}
+            
+            
+            inline const uint8_t& getMatchingUnit() const noexcept {return matchingUnit_;}
+            
             inline uint8_t getMatchingUnitCopy() const noexcept {return matchingUnit_;}
 
         
-            inline constexpr const uint32_t& getSequenceNumber() const noexcept {return sequenceNumber_;}
+            
+            
+            inline const uint32_t& getSequenceNumber() const noexcept {return sequenceNumber_;}
+            
             inline uint32_t getSequenceNumberCopy() const noexcept {return sequenceNumber_;}
 
         
@@ -477,7 +495,10 @@ class LoginRequest {
             
 
         
-            inline constexpr const uint16_t& getStartOfMessage() const noexcept {return startOfMessage_;}
+            
+            
+            inline const uint16_t& getStartOfMessage() const noexcept {return startOfMessage_;}
+            
             inline uint16_t getStartOfMessageCopy() const noexcept {return startOfMessage_;}
 
         
@@ -487,11 +508,17 @@ class LoginRequest {
             inline void setMessageLength(uint16_t messageLength) noexcept { messageLength_ = messageLength;}
 
         
-            inline constexpr const uint8_t& getMessageType() const noexcept {return messageType_;}
+            
+            
+            inline const uint8_t& getMessageType() const noexcept {return messageType_;}
+            
             inline uint8_t getMessageTypeCopy() const noexcept {return messageType_;}
 
         
-            inline constexpr const uint8_t& getMatchingUnit() const noexcept {return matchingUnit_;}
+            
+            
+            inline const uint8_t& getMatchingUnit() const noexcept {return matchingUnit_;}
+            
             inline uint8_t getMatchingUnitCopy() const noexcept {return matchingUnit_;}
 
         

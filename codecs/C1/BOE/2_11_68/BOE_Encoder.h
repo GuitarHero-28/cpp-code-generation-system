@@ -1,7 +1,8 @@
-##pragma once
+#pragma once
 #include "BOE_Msgs.h"
 #include "../../../../common/status.h"
 #include "../../../../common/utils.h"
+#include <type_traits>
 
 
 
@@ -9,6 +10,23 @@
 template <typename HandlerType>
 class Encoder {
     
+
+    
+    template <typename U>
+    inline typename std::enable_if<std::is_enum<U>::value>::type
+    _check_field_validity(const U& field, Status& status) {
+        if (field == U::UNKNOWN) {
+            status.updateStatus(StatusEnum::INVALID_OBJECT);
+        }
+    }
+
+    template <typename U>
+    inline typename std::enable_if<!std::is_enum<U>::value>::type
+    _check_field_validity(const U& field, Status& status) {
+        // Not an enum, so no check is needed
+    }
+    
+
 
     
     template <typename U>
@@ -26,14 +44,9 @@ class Encoder {
         }
 
         
-        if constexpr (std::is_enum<U>::value)
-        {
-            if (field == U::UNKNOWN)
-            {
-                status.updateStatus(StatusEnum::INVALID_OBJECT);
-                return;
-            }
-        }
+        _check_field_validity(field, status);
+        if (status.getStatus() != StatusEnum::PARSING)
+            return;
 
         
         *reinterpret_cast<U *>(start) = field;
