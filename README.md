@@ -80,7 +80,7 @@ cd cpp-code-generation-system
 
 Install the required Python packages for the generator script.
 
-# 'python' or 'python3' depending on your system
+'python' or 'python3' depending on your system
 python -m pip install -r requirements.txt
 
 
@@ -88,7 +88,7 @@ python -m pip install -r requirements.txt
 
 Run the Python generator script. This reads the c1_boe_2_11_68.yaml file and creates all the C++ header files.
 
-# Note: We must use the config with underscores for the script to parse it
+Note: We must use the config with underscores for the script to parse it
 python ./generate_code.py --config c1_boe_2_11_68.yaml --create
 
 
@@ -96,28 +96,28 @@ python ./generate_code.py --config c1_boe_2_11_68.yaml --create
 
 Navigate into the newly generated directory and compile the test.cpp file.
 
-# Navigate to the generated code
+Navigate to the generated code
 cd codecs/C1/BOE/2_11_68
 
-# Compile the C++ test file
-# The code is C++14 compatible, so G++ 6.3.0 will work.
-# Use -o test.exe on Windows
+Compile the C++ test file
+The code is C++14 compatible, so G++ 6.3.0 will work.
+Use -o test.exe on Windows
 g++ -O3 test.cpp -o test.exe
 
-# On Linux or macOS, use:
-# g++ -O3 test.cpp -o test.out
+On Linux or macOS, use:
+g++ -O3 test.cpp -o test.out
 
 
 6. Run the Tests!
 
 You can now run your compiled program. The test.cpp file is designed to read a message type and a payload file from the command line.
 
-# Run the LoginRequest test
-# (55 is the decimal for 0x37, the LoginRequest message type)
+Run the LoginRequest test
+(55 is the decimal for 0x37, the LoginRequest message type)
 ./test.exe 55 tests/LoginRequest.txt
 
-# Run the NewOrderCross test
-# (65 is the decimal for 0x41, the NewOrderCross message type)
+Run the NewOrderCross test
+(65 is the decimal for 0x41, the NewOrderCross message type)
 ./test.exe 65 tests/NewOrderCross.txt
 
 
