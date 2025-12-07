@@ -1,136 +1,160 @@
-High-Performance C++ Code Generator for Binary Financial Protocols
+# 🚀 High-Performance C++ Code Generator for Binary Financial Protocols: A Complete Guide
 
-Project Overview
+## 💡 Project Overview
 
-This project is a sophisticated, low-latency C++ code generator for the Binary Order Entry (BOE) protocol, a system used in high-frequency trading (HFT) and financial exchanges.
+This project is a mission-critical **low-latency C++ code generator** designed for binary financial protocols, such as the **Binary Order Entry (BOE)** system used in High-Frequency Trading (HFT) and financial exchanges.
 
-The core of this project is a Python script that parses a human-readable YAML schema of the protocol. It uses a Jinja2 templating engine to automatically generate a complete, high-performance C++ library for encoding and decoding BOE messages.
+At its core, a **Python script** reads a human-readable **YAML schema** of the protocol and uses the **Jinja2 templating engine** to automatically generate an optimized, header-only C++ library for encoding and decoding BOE messages.
 
-This approach solves a critical problem in FinTech: it automates the creation of fast, accurate, and maintainable serialization code, eliminating the risk of manual error and dramatically speeding up development.
+This eliminates manual coding errors, accelerates development, and ensures consistent, high-performance serialization.
 
-The Problem: Speed vs. Safety
+---
 
-In high-frequency trading, every nanosecond matters. Developers must manually write C++ code to serialize (encode) and deserialize (decode) complex, low-latency binary protocols. This manual process is:
+## ❓ The Problem: Speed vs. Safety
 
-Error-Prone: A single mistake in bit-shifting or byte alignment can lead to corrupt data and significant financial loss.
+In HFT environments where microseconds matter, manual C++ serialization becomes a liability:
 
-Time-Consuming: Manually coding for dozens of complex message types is a slow, tedious process.
+- **Error-Prone:** A single wrong bit-shift corrupts a financial message.
+- **Slow to Develop:** Writing encoders/decoders for dozens of message types is tedious.
+- **Hard to Maintain:** Protocol upgrades require repeated, error-prone manual updates.
 
-Hard to Maintain: When the exchange updates the protocol, developers must painstakingly find and update every part of the codebase.
+---
 
-The Solution: A C++ "Factory"
+## ✅ The Solution: A C++ "Factory"
 
-This project builds a code generator that acts as a "factory" for C++ messaging code. The workflow is simple:
+This project builds a **code generator** that acts like a “factory" for producing C++ message types:
 
-Define: A developer defines the entire protocol in a simple, human-readable YAML file (.yaml).
+1. **Define** the protocol in YAML.  
+2. **Generate** optimized header-only C++ code using Python + Jinja2.  
+3. **Use** the generated encoders/decoders directly in trading engines.
 
-Generate: The Python script reads this YAML and uses Jinja2 templates to automatically generate all the necessary C++ headers (Encoder.h, Decoder.h, Messages.h).
+A protocol update = update YAML → regenerate → done.
 
-Use: The generated C++ code is highly optimized, header-only, and can be directly included in a trading application for ultra-low-latency performance.
+---
 
-If the protocol changes, the developer only needs to update the YAML file and re-run the generator, saving days or weeks of work.
+## 🛠️ Technology Stack
 
-Technology Stack
+| Component | Technology | Role |
+|----------|------------|------|
+| **Generator** | Python 3 | Reads schema and outputs C++ |
+| **Templates** | Jinja2 | Converts definitions into real C++ code |
+| **Schema** | YAML | Source-of-truth for the entire protocol |
+| **Output** | C++14/17 | Header-only, ultra-low-latency codecs |
+| **Domain** | HFT / FinTech | Binary serialization under extreme performance constraints |
 
-Core Generator: Python 3
+---
 
-Templating Engine: Jinja2
+## 🌟 Key Demonstrated Skills
 
-Schema Definition: YAML
+This project highlights:
 
-Generated Code: C++14 (or newer)
+- System architecture for protocol-driven code generation  
+- Metaprogramming and automation using Jinja2  
+- Advanced binary serialization concepts  
+- C++14/17 compiler-level optimization  
+- Real-world FinTech protocol engineering  
+- Developer tooling design  
 
-Domain: FinTech (High-Frequency Trading), Binary Protocols, Low-Latency Systems
+---
 
-Skills Demonstrated
+## ⚙️ Getting Started (Windows-Focused Guide)
 
-Systems Architecture: Designing a robust, template-driven architecture for mission-critical applications.
+### 1️⃣ Install Prerequisites
 
-Metaprogramming: Using Python and Jinja2 as a powerful code-generation engine to write high-performance C++, eliminating manual error.
+- Git  
+- Python 3.6+  
+- G++ 6.3.0+ or MSYS2/MinGW C++14 compiler  
 
-Cross-Compiler C++: Generating C++ code that is compatible with both modern (C++17) and older (C++14) compilers by using techniques like std::enable_if.
+---
 
-FinTech Domain Knowledge: Demonstrates a deep understanding of the challenges in HFT, including binary serialization and the critical need for speed.
+### 2️⃣ Clone the Repository
 
-Automation & Tooling: Building a complete developer tool that automates a complex, error-prone manual task, dramatically improving the development workflow.
-
-How to Run
-
-Here is the complete guide to clone, generate, compile, and run the project.
-
-1. Prerequisites
-
-Before you begin, ensure you have the following tools installed and added to your system's PATH:
-
-Git: For cloning the repository.
-
-Python: (Version 3.6 or newer).
-
-A C++14 Compiler: A G++ compiler (from MinGW-w64 or MSYS2 on Windows) that supports C++14. G++ 6.3.0 or newer is sufficient.
-
-2. Clone the Repository
-
-Open your terminal (PowerShell, cmd, or bash) and clone the project.
-
-git clone [https://github.com/GuitarHero-28/cpp-code-generation-system.git](https://github.com/GuitarHero-28/cpp-code-generation-system.git)
+```powershell
+git clone https://github.com/GuitarHero-28/cpp-code-generation-system.git
 cd cpp-code-generation-system
+```
 
+---
 
-3. Install Python Dependencies
+### 3️⃣ Install Python Dependencies
 
-Install the required Python packages for the generator script.
-
-'python' or 'python3' depending on your system
+```powershell
 python -m pip install -r requirements.txt
+```
 
+---
 
-4. Generate the C++ Codec
+### 4️⃣ Generate the C++ Codec
 
-Run the Python generator script. This reads the c1_boe_2_11_68.yaml file and creates all the C++ header files.
-
-Note: We must use the config with underscores for the script to parse it
+```powershell
 python ./generate_code.py --config c1_boe_2_11_68.yaml --create
+```
 
+This reads the YAML and generates the full codec under:
 
-5. Compile the C++ Test Program
+```
+codecs/C1/BOE/2_11_68/
+```
 
-Navigate into the newly generated directory and compile the test.cpp file.
+---
 
-Navigate to the generated code
+### 5️⃣ Compile the Test Program
+
+```powershell
 cd codecs/C1/BOE/2_11_68
-
-Compile the C++ test file
-The code is C++14 compatible, so G++ 6.3.0 will work.
-Use -o test.exe on Windows
 g++ -O3 test.cpp -o test.exe
+```
 
-On Linux or macOS, use:
-g++ -O3 test.cpp -o test.out
+---
 
+### 6️⃣ Run the Tests
 
-6. Run the Tests!
+Each test requires:
 
-You can now run your compiled program. The test.cpp file is designed to read a message type and a payload file from the command line.
+```
+./test.exe <message_type_decimal> <payload_file>
+```
 
-Run the LoginRequest test
-(55 is the decimal for 0x37, the LoginRequest message type)
+Example: LoginRequest (55 = 0x37)
+
+```powershell
 ./test.exe 55 tests/LoginRequest.txt
+```
 
-Run the NewOrderCross test
-(65 is the decimal for 0x41, the NewOrderCross message type)
-./test.exe 65 tests/NewOrderCross.txt
+Example: NewOrderCross (65 = 0x41)
 
+```powershell
+./test.exe 65 tests/NewCrossOrder.txt
+```
 
-What to Expect (Successful Output)
+---
 
-If everything works, you will see the full test results printed to your terminal, ending with:
+## ✔️ Expected Output (Correct Run)
 
-...
-========================================================================
-INPUT PAYLOAD -> DECODER -> MSG OBJECT -> ENCODER -> ENCODED PAYLOAD
-========================================================================
-Original Hex Payload : BABA001D37000000000053303120544553545041535331323334353600
-Encoded Hex Payload  : BABA001D37000000000053303120544553545041535331323334353600
+You should see:
 
-Result: INPUT PAYLOAD == ENCODED PAYLOAD
-========================================================================
+```
+# INPUT PAYLOAD -> DECODER -> MSG OBJECT -> ENCODER -> ENCODED PAYLOAD
+
+Original Hex Payload : BABA3D00370000000000303030315445535454455354494E47000000030F00800102014ABB0100020000000008008125030041050B00812C06004107004000  
+Encoded  Hex Payload : BABA3D00370000000000303030315445535454455354494E47000000030F00800102014ABB0100020000000008008125030041050B00812C06004107004000
+
+# Result: INPUT PAYLOAD == ENCODED PAYLOAD
+```
+
+If both payloads match, your generated encoder/decoder is functioning correctly.
+
+---
+
+## 🎉 Final Notes
+
+This project demonstrates how modern tooling (Python + Jinja2) and system-level C++ can be combined to build **high-speed, future-proof, automatically generated binary protocol handlers**.
+
+It can be extended to:
+
+- FIX / ITCH / OUCH style protocols  
+- Multi-exchange HFT infrastructure  
+- Larger message suites  
+- Cross-language serialization systems  
+
+A scalable foundation for real-world high-performance FinTech engineering.
