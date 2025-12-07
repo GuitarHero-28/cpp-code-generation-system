@@ -1,5 +1,7 @@
 # 🚀 High-Performance C++ Code Generator for Binary Financial Protocols: A Complete Guide
 
+> **Note:** This README was generated with the help of AI — please don't judge me for that 😄
+
 ## 💡 Project Overview
 
 This project is a mission-critical **low-latency C++ code generator** designed for binary financial protocols, such as the **Binary Order Entry (BOE)** system used in High-Frequency Trading (HFT) and financial exchanges.
